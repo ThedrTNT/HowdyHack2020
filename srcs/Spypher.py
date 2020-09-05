@@ -1,3 +1,5 @@
+import base64
+
 alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def encryptCaesar(msg, shift):
@@ -28,6 +30,15 @@ def decryptCaesar(msg, shift):
         else:
             result += chr((ord(letter) - shift - 97) % 26 + 97)
     return result
+#7364
+
+def encryptBase64(msg):
+    result = base64.b16encode(msg.encode('utf-8')).decode('utf-8')
+    return result
+
+def decryptBase64(msg):
+    result = base64.b16decode(msg.encode('utf-8')).decode('utf-8')
+    return result
 
 
 print("Welcome to Spypher!")
@@ -49,13 +60,20 @@ if userInput.upper() == "E":
         shiftNum = int(input("Please enter number to shift by:\n"))
         print(encryptCaesar(message, shiftNum))
 
+    if userInput.upper() == "B":
+        print(encryptBase64(message))
+
 if userInput.upper() == "D":
     message = str(input("Please enter message to decrypt:\n"))
     print("Please select a method to use:")
     print("\tC: Caesar Cipher")
+    print("\tB: Base64 Encryption")
 
     userInput = str(input())
 
     if userInput.upper() == "C":
         shiftNum = int(input("Please enter the number the message is shifted by:\n"))
         print(decryptCaesar(message, shiftNum))
+
+    if userInput.upper() == "B":
+        print(decryptBase64(message))
