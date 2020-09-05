@@ -30,7 +30,12 @@ def decryptCaesar(msg, shift):
         else:
             result += chr((ord(letter) - shift - 97) % 26 + 97)
     return result
-#7364
+
+
+def decryptCaesarBrute(msg):
+    for key in range(25):
+        print("Shift by #" + str(key) + " \"" + decryptCaesar(msg, key) + "\"")
+
 
 def encryptBase64(msg):
     result = base64.b16encode(msg.encode('utf-8')).decode('utf-8')
@@ -67,6 +72,7 @@ if userInput.upper() == "D":
     message = str(input("Please enter message to decrypt:\n"))
     print("Please select a method to use:")
     print("\tC: Caesar Cipher")
+    print("\tCB: Casear Cipher Brute Force")
     print("\tB: Base64 Encryption")
 
     userInput = str(input())
@@ -74,6 +80,9 @@ if userInput.upper() == "D":
     if userInput.upper() == "C":
         shiftNum = int(input("Please enter the number the message is shifted by:\n"))
         print(decryptCaesar(message, shiftNum))
+
+    if userInput.upper() == "CB":
+        decryptCaesarBrute(message)
 
     if userInput.upper() == "B":
         print(decryptBase64(message))
