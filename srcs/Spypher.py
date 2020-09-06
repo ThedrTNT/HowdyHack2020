@@ -1,7 +1,9 @@
 import base64
 
+
 alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890"
 numbers = "1234567890"
+
 
 def encryptCaesar(msg, shift):
     result = ""
@@ -111,3 +113,5 @@ while True:
 
         if userInput.upper() == "B":
             print(decryptBase64(message))
+
+
