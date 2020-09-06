@@ -12,7 +12,7 @@ def encryptCaesar(msg, shift):
             result += letter
             continue
         elif letter in numbers:
-            result += str((int(letter) + shift) % 10)
+            result += str((int(letter) + (shift % 10)) % 10)
         elif letter.isupper():
             result += chr((ord(letter) + shift-65) % 26 + 65)
         else:
@@ -29,7 +29,7 @@ def decryptCaesar(msg, shift):
             result += letter
             continue
         elif letter in numbers:
-            result += str((int(letter) - shift) % 10)
+            result += str((int(letter) - (shift % 10)) % 10)
         elif letter.isupper():
             result += chr((ord(letter) - shift - 65) % 26 + 65)
         else:
@@ -38,7 +38,7 @@ def decryptCaesar(msg, shift):
 
 
 def decryptCaesarBrute(msg):
-    for key in range(25):
+    for key in range(26):
         print("Shift by #" + str(key) + " \"" + decryptCaesar(msg, key) + "\"")
 
 
@@ -79,7 +79,10 @@ while True:
             exit()
 
         if userInput.upper() == "C":
-            shiftNum = int(input("Please enter number to shift by:\n"))
+            shiftNum = int(input("Please enter number to shift by(1-25):\n"))
+            while shiftNum > 25 or shiftNum < 1:
+                print("ERROR: Invalid number!")
+                shiftNum = int(input("Please enter a number to shift by(1-25):\n"))
             print(encryptCaesar(message, shiftNum))
 
         if userInput.upper() == "B":
